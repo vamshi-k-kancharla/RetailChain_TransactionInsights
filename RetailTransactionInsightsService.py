@@ -11,6 +11,9 @@ import pandas as pd
 
 from BasicInsights import ProcessBasicRetailTransactionInsights
 from CustomerBehaviorAnalysis import ProcessCustomerBehavioralAnalysisInsights
+from PromotionAndDiscountImpact import ProcessImpactOfPromotionAndDiscount
+from SeasonalityTrends import ProcessSeasonalityTrends
+from VisualizationDashboard import PlotTheTrendsAndCharts
 
 
 '''
@@ -41,48 +44,52 @@ def ProcessRetailTransactionInsights(retailTransactionsDataFrame) :
 
     '''
 
-    while True :
+    try :
 
+        while True :
 
-        print('\n')
-        print('\n')
-        print('=' * 40)
+            print('\n')
+            print('\n')
+            print('=' * 40)
 
-        PrintTaskInputParameterDetails()
-        task = int(input('enter the given task input : '))
+            PrintTaskInputParameterDetails()
+            task = int(input('enter the given task input : '))
 
-        print('\n')
+            print('\n')
 
-        match task :
+            match task :
 
-            case 1 :
+                case 1 :
 
-                ProcessBasicRetailTransactionInsights(retailTransactionsDataFrame)
+                    ProcessBasicRetailTransactionInsights(retailTransactionsDataFrame)
 
-            case 2 :
+                case 2 :
 
-                ProcessCustomerBehavioralAnalysisInsights(retailTransactionsDataFrame)
+                    ProcessCustomerBehavioralAnalysisInsights(retailTransactionsDataFrame)
 
-            case 3 :
+                case 3 :
 
-                ProcessBasicRetailTransactionInsights(retailTransactionsDataFrame)
+                    ProcessImpactOfPromotionAndDiscount(retailTransactionsDataFrame)
 
-            case 4 :
+                case 4 :
 
-                ProcessBasicRetailTransactionInsights(retailTransactionsDataFrame)
+                    ProcessSeasonalityTrends(retailTransactionsDataFrame)
 
-            case 5 :
+                case 5 :
 
-                ProcessBasicRetailTransactionInsights(retailTransactionsDataFrame)
+                    PlotTheTrendsAndCharts(retailTransactionsDataFrame)
 
-            case 6 :
+                case 6 :
 
-                break
+                    break
 
-            case _ :
+                case _ :
 
-                print("Invalid input entered...Please try again")
+                    print("Invalid input entered...Please try again")
 
+    except Exception as e :
+
+        print("Exception occured while executing the code => ", e)
 
 '''
     Read the CSV File
@@ -90,19 +97,12 @@ def ProcessRetailTransactionInsights(retailTransactionsDataFrame) :
 
 '''
 
+
+print("Reading CSV File of Retail Chain Transactions")
+
 retailTransactionsDataFrame = pd.read_csv("Retail_Transactions_Dataset.csv")
-print(retailTransactionsDataFrame)
+#print(retailTransactionsDataFrame)
 
 ProcessRetailTransactionInsights(retailTransactionsDataFrame)
-
-
-
-
-
-
-
-
-
-
 
 
